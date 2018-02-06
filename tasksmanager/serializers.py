@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from maincrawler.serializers import GenoSpiderSerializer
+from maincrawler.serializers import GenieSpiderSerializer
 from .models import SpiderTask
 
 

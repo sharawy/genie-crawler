@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from .models import GenoSpider
+from .models import GenieSpider
 
 
-class GenoSpiderSerializer(serializers.ModelSerializer):
+class GenieSpiderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = GenoSpider
+        model = GenieSpider
         fields = ('id', 'name', 'url', 'items_structure')

@@ -5,13 +5,13 @@ from rest_framework.viewsets import ModelViewSet
 
 from tasksmanager.models import SpiderTask
 from tasksmanager.serializers import SpiderTaskSerializer
-from .models import GenoSpider
-from .serializers import GenoSpiderSerializer
+from .models import GenieSpider
+from .serializers import GenieSpiderSerializer
 
 
-class GenoSpiderViewSet(ModelViewSet):
-    serializer_class = GenoSpiderSerializer
-    queryset = GenoSpider.objects.all()
+class GenieSpiderViewSet(ModelViewSet):
+    serializer_class = GenieSpiderSerializer
+    queryset = GenieSpider.objects.all()
     permission_classes = (IsAuthenticated,)
 
     @detail_route(methods=['get'], url_path='start_task/(?P<task_id>[0-9]+)')

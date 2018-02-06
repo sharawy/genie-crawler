@@ -2,13 +2,13 @@ from django.contrib.postgres.fields import JSONField
 from django.db import models
 from urllib.parse import urlparse
 
-from maincrawler.models import GenoSpider
+from maincrawler.models import GenieSpider
 from genie_crawler.settings import USER_AGENT, CRAWLER_NAME, scrapyd
 from . import TaskStatus
 
 
 class SpiderTask(models.Model):
-    spider = models.ForeignKey(GenoSpider, on_delete=models.CASCADE,related_name='tasks')
+    spider = models.ForeignKey(GenieSpider, on_delete=models.CASCADE, related_name='tasks')
     logs = models.TextField(null=True, blank=True)
     status = models.CharField(max_length=50, null=True, blank=True,default=TaskStatus.INITIATED)
     extracted_items = JSONField(blank=True, null=True, default=[])

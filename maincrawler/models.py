@@ -15,7 +15,7 @@ class ItemStructure(models.Model):
     attributes = models.ManyToManyField(ItemAttribute)
 
 
-class GenoSpider(models.Model):
+class GenieSpider(models.Model):
     name = models.CharField(max_length=100)
     url = models.URLField()
     items_structure = models.ManyToManyField(ItemStructure)
