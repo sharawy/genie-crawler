@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'genie_crawler.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'geno_spider',
+        'NAME': 'genie',
         'USER': 'abdulrahmanSh',
         'PASSWORD': '',
         'HOST': '127.0.0.1',

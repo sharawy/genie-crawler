@@ -10,9 +10,12 @@ from . import TaskStatus
 class SpiderTask(models.Model):
     spider = models.ForeignKey(GenieSpider, on_delete=models.CASCADE, related_name='tasks')
     logs = models.TextField(null=True, blank=True)
-    status = models.CharField(max_length=50, null=True, blank=True,default=TaskStatus.INITIATED)
+    status = models.CharField(max_length=50, null=True, blank=True,default=TaskStatus.INITIATED,choices=TaskStatus.CHOICES,editable=False)
     extracted_items = JSONField(blank=True, null=True, default=[])
     scrapyd_task_id = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return "Task #{} for {}".format(self.pk,self.spider)
 
     def start_task(self, **kwargs):
         url = self.spider.url

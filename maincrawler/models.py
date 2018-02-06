@@ -8,12 +8,16 @@ class ItemAttribute(models.Model):
     name = models.CharField(max_length=100)
     xpath = models.TextField()
 
+    def __str__(self):
+        return self.name
 
 class ItemStructure(models.Model):
     xpath = models.TextField()
     details_url = models.TextField(help_text="Xpath for item details url", blank=True, null=True)
     attributes = models.ManyToManyField(ItemAttribute)
 
+    def __str__(self):
+        return self.xpath
 
 class GenieSpider(models.Model):
     name = models.CharField(max_length=100)
