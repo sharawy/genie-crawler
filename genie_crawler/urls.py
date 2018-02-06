@@ -1,4 +1,4 @@
-"""geno_crawler URL Configuration
+"""genie_crawler URL Configuration
 
 """
 from django.conf.urls import url, include

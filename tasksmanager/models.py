@@ -3,7 +3,7 @@ from django.db import models
 from urllib.parse import urlparse
 
 from maincrawler.models import GenoSpider
-from geno_crawler.settings import USER_AGENT, CRAWLER_NAME, scrapyd
+from genie_crawler.settings import USER_AGENT, CRAWLER_NAME, scrapyd
 from . import TaskStatus
 
 

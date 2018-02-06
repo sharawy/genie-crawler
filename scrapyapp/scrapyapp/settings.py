@@ -14,7 +14,7 @@ import sys
 # DJANGO INTEGRATION
 
 sys.path.append(os.path.dirname(os.path.abspath('.')))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'geno_crawler.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'genie_crawler.settings'
 
 import django
 
