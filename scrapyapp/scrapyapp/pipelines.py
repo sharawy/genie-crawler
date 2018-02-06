@@ -4,6 +4,7 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
+from tasksmanager import TaskStatus
 
 
 class ScrapyappPipeline(object):
@@ -16,4 +17,5 @@ class ScrapyappPipeline(object):
 
     def close_spider(self, spider):
         spider.task.extracted_items = self.scraped_items
+        spider.task.status = TaskStatus.FINISHED
         spider.task.save()
