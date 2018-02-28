@@ -18,7 +18,7 @@ class DefaultCrawlerSpider(CrawlSpider):
         self.spider_conf = self.task.spider
 
         DefaultCrawlerSpider.rules = [
-            Rule(LinkExtractor(unique=True), callback='parse_page'),
+            Rule(LinkExtractor(unique=True), callback='parse_page', follow=kwargs.get('follow', False)),
         ]
         super(DefaultCrawlerSpider, self).__init__(*args, **kwargs)
 
