@@ -2,15 +2,16 @@ from django.contrib.postgres.fields import JSONField
 from django.db import models
 from urllib.parse import urlparse
 
-from maincrawler.models import GenieSpider
 from genie_crawler.settings import USER_AGENT, CRAWLER_NAME, scrapyd
+from maincrawler.models import GenieSpider
 from . import TaskStatus
 
 
 class SpiderTask(models.Model):
     spider = models.ForeignKey(GenieSpider, on_delete=models.CASCADE, related_name='tasks')
     logs = models.TextField(null=True, blank=True)
-    status = models.CharField(max_length=50, null=True, blank=True,default=TaskStatus.INITIATED,choices=TaskStatus.CHOICES,editable=False)
+    status = models.CharField(max_length=50, null=True, blank=True,default=TaskStatus.INITIATED,
+                              choices=TaskStatus.CHOICES,editable=False)
     extracted_items = JSONField(blank=True, null=True, default=[])
     scrapyd_task_id = models.TextField(null=True, blank=True)
 
@@ -46,7 +47,7 @@ class SpiderTask(models.Model):
         return status
 
     def cancel_task(self):
-        status = scrapyd.cancel('default', self.scrapyd_task_id)
+        scrapyd.cancel('default', self.scrapyd_task_id)
         if self.status != TaskStatus.FINISHED:
             self.status = TaskStatus.CANCELED
             self.save()
