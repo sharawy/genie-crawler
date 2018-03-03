@@ -107,3 +107,12 @@ ENV/
 #scrpay
 *.pid
 *.db
+
+/media/
+/node_modules/
+/static/
+webpack-bundle.json
+/locale/
+
+
+local_settings.py

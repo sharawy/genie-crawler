@@ -45,3 +45,4 @@ psycopg2==2.7.3.2
 djangorestframework==3.7.7
 coreapi==2.3.3
 scrapyd==1.2.0
+django-webpack-loader==0.6.0
