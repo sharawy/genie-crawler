@@ -110,7 +110,7 @@ ENV/
 
 /media/
 /node_modules/
-/static/
+/static/assets
 webpack-bundle.json
 /locale/
 
