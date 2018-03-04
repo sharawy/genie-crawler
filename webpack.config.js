@@ -61,7 +61,7 @@ var faviconsWebpackPlugin = new FaviconsWebpackPlugin({
 
 var config = {
   entry: {
-    storefront: './static/assets/js/index.js',
+    front: './static/assets/js/index.js',
     vendor: [
       'babel-es6-polyfill',
       'bootstrap',
