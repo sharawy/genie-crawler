@@ -16,16 +16,12 @@ const ActionBar = (props) => {
                     <ul className="navbar-nav ml-auto">
                         <DragDropContainer>
                             <li className="nav-item dropdown show">
-                                <button className="btn btn-dark my-2 my-sm-0 dropdown-toggle" href="http://example.com"
+                                <button className="btn btn-dark my-4 my-sm-2 dropdown-toggle" href="http://example.com"
                                         id="dropdown01"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Item to scrape
                                 </button>
-                                <div className="dropdown-menu" style={{width: "500px"}} aria-labelledby="dropdown01">
-
-
+                                <div className="dropdown-menu row  left80"  aria-labelledby="dropdown01">
                                     <Item/>
-
-
                                 </div>
                             </li>
                         </DragDropContainer>

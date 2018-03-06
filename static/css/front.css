@@ -1,2 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
 
+
+.dropdown-menu {
+    min-width:24rem ;
+}
+.left80{
+    left:-80%;
+}

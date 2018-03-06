@@ -3,14 +3,16 @@ import ItemAttribute from './ItemAttribute'
 
 const Item = (props) => {
     return (
-        <form className="form-inline">
+        <form>
             <div className="form-group">
-                <div className="input-group-addon">@</div>
-                <input type="text" class="form-control" name="xpath" placeholder="item xpath"/>
+
+                <input type="text" className="form-control" id="formGroupExampleInput" placeholder="Item Xpath"/>
             </div>
+
             <ItemAttribute/>
+
         </form>
-    )
+)
 }
 
 export default Item;
