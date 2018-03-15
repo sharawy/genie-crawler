@@ -13,16 +13,26 @@ class CrawlingTools extends Component {
         fetch('/fetch_website?url=http://quotes.toscrape.com/')
             .then(response => response.text())
             .then(data => {
-                this.setState({html: data});});
+                this.setState({html: data});
+            });
 
     }
 
     load(e) {
+        $(e.target).contents().on('click', function (e) {
+            e.preventDefault()
+            console.log(e);
 
-            $('#iframe_id').contents().on('click', function (e) {
-                console.log(e);
+        });
+        $(e.target).contents().mouseover( function (e) {
+            $(e.target).css('border','5px solid red');
+            console.log("mouseover")
+        });
+         $(e.target).contents().mouseout( function (e) {
+            $(e.target).css('border','0px solid white');
+                         console.log("mouseout")
 
-            })
+        });
 
     }
 
