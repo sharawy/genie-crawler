@@ -1,55 +1,72 @@
 import React, {Component} from 'react';
-import decode from 'unescape';
+
 import {API} from '../common/constants'
+import Extractor from "./Extractor";
+
+class XpathValue {
+    constructor(name, xpath) {
+        this.name = name;
+        this.xpath = xpath;
+    }
+}
 
 class WebView extends Component {
-    FETCH_WEBVIEW = API + "fetch_website/";
+    FETCH_WEBVIEW = API + "fetch_website/?url=";
 
     constructor(props) {
         super(props);
-        this.params = "?url=" + props.url
         this.state = {
-            htmlResponse: [],
-            isLoading: true,
-            error: null,
+            url: props.url,
+            html: '',
+            view: null,
+            attributes: [],
+            item: {},
+            extractor : props.extractor
+        }
 
-        };
     }
 
     componentDidMount() {
-        this.fetchWebsiteHtml()
-
-    }
-
-    fetchWebsiteHtml() {
-        this.setState({isLoading: true});
-
-        fetch(this.FETCH_WEBVIEW + this.params)
+        fetch(this.FETCH_WEBVIEW + this.state.url)
             .then(response => response.text())
-            .then(data => this.setState({htmlResponse: data, isLoading: false}))
-            .catch(error => this.setState({error, isLoading: false}));
+            .then(data => {
+                this.setState({html: data});
+            });
+        this.load = this.load.bind(this)
     }
 
-    htmlDecode(input) {
-        var e = document.createElement('div');
-        e.innerHTML = input;
-        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+
+
+    load(e) {
+        var view = this
+        $(e.target).contents().on('click', function (e) {
+            e.preventDefault()
+            console.log(view.state.extractor(e))
+
+        });
+        $(e.target).contents().mouseover(function (e) {
+            $(e.target).css('border', '1px solid red');
+        });
+        $(e.target).contents().mouseout(function (e) {
+            $(e.target).css('border', '0px solid white');
+        });
+
     }
+
 
     render() {
-        const {htmlResponse, isLoading, error} = this.state;
-        if (error) {
-            return <p>{error.message}</p>;
-        }
-        console.log(isLoading);
-        if (isLoading) {
-            return <p>Loading ...</p>;
-        }
-        console.log(htmlResponse);
+
+        let html = this.state.html
+        let blob = new Blob([html], {type: 'text/html'});
+        let src = URL.createObjectURL(blob);
 
         return (
-            <div dangerouslySetInnerHTML={{__html: decode(htmlResponse)}}/>
-        );
+            <div>
+                <iframe id="iframe_id" onLoad={this.load.bind(this)}
+                        className="embed-responsive embed-responsive-16by9" src={src}
+                        width="100%" height="1000px" scrolling="yes"></iframe>
+            </div>
+        )
     }
 }
 

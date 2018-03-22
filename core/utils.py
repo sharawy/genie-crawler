@@ -7,5 +7,5 @@ def add_base_tag(html, url):
     head = soup.find('head')
     base = soup.new_tag('base')
     base['href'] = url
-    head.insert(1, base)
+    head.insert(0, base)
     return soup

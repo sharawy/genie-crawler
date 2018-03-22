@@ -40,4 +40,6 @@ class DefaultCrawlerSpider(CrawlSpider):
         attributes = structure.attributes.all()
         for attr in attributes:
             data[attr.name] = selector.xpath(attr.xpath).extract_first()
+            print(data)
+
         return data

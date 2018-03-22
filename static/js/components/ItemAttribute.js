@@ -5,8 +5,8 @@ const ItemAtrribute = (props) =>{
     return (
 
         <div class="form-group">
-         <input type="text" placeholder="Attribute name"/>:
-         <input type="text"  placeholder="Attribute Xpath"/>
+         <input type="text" placeholder="Attribute name" disabled={props.disabled}/>:
+         <input type="text"  placeholder="Attribute Xpath" disabled={props.disabled}/>
         </div>
     );
 };
