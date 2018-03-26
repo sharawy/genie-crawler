@@ -6,23 +6,29 @@ class Extractor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            itemXpath: props.extracted,
-            attributes: []
+            itemXpath: '',
+            attributes: props.extracted,
         }
+        this.remove_attr = props.removeHandler
     }
 
     componentWillReceiveProps(nextProps) {
         console.log(nextProps)
         let state = {
-            itemXpath: nextProps.extracted,
-            attributes: []
+            itemXpath: '',
+            attributes: nextProps.extracted
         }
         this.setState({...state})
     }
 
+
     render() {
 
-        let state = this.state
+        let state = this.state;
+        let attrs = state.attributes.map((attr, index) =>
+            <ItemAttribute key={index} removeHandler={(e) => this.remove_attr(index)} xpath={attr.xpath} name={attr.name}/>
+        );
+
         return (
             <DragDropContainer>
                 <div className="nav-item dropdown show">
@@ -31,16 +37,16 @@ class Extractor extends Component {
                     >Extractor
                     </button>
                     <div className="dropdown-menu show row  left80" aria-labelledby="dropdown01">
-
+                        <h3>Click on element to add xpath</h3>
                         <form>
                             <div className="form-group">
 
-                                <input type="text" value={state.itemXpath} className="form-control"
-                                       id="formGroupExampleInput"
-                                       placeholder="Item Xpath"/>
+                                {/*<input type="text" value={state.itemXpath} className="form-control"*/}
+                                {/*id="formGroupExampleInput"*/}
+                                {/*placeholder="Item Xpath"/>*/}
                             </div>
 
-                            <ItemAttribute disabled={true}/>
+                            {attrs}
 
                         </form>
                     </div>

@@ -4,6 +4,14 @@ from __future__ import unicode_literals
 from django.db import models
 
 
+class GenieSpider(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.URLField()
+
+    def __str__(self):
+        return self.name
+
+
 class ItemAttribute(models.Model):
     name = models.CharField(max_length=100)
     xpath = models.TextField()
@@ -11,21 +19,9 @@ class ItemAttribute(models.Model):
     def __str__(self):
         return self.name
 
-class ItemStructure(models.Model):
-    xpath = models.TextField()
+
+class Extractor(models.Model):
+    xpath = models.TextField(blank=True, null=True)
     details_url = models.TextField(help_text="Xpath for item details url", blank=True, null=True)
     attributes = models.ManyToManyField(ItemAttribute)
-
-    def __str__(self):
-        return self.xpath
-
-class GenieSpider(models.Model):
-    name = models.CharField(max_length=100)
-    url = models.URLField()
-    items_structure = models.ManyToManyField(ItemStructure)
-
-    def __str__(self):
-        return self.name
-
-
-
+    spider = models.ForeignKey(GenieSpider, on_delete=models.CASCADE,related_name='extractors')

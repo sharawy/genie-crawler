@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'webpack_loader',
     ###
+    'core',
     'maincrawler',
     'tasksmanager',
 ]

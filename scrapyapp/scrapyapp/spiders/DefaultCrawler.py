@@ -24,22 +24,26 @@ class DefaultCrawlerSpider(CrawlSpider):
 
     def get_items_structure(self):
 
-        item_structure = self.spider_conf.items_structure.all()
+        item_structure = self.spider_conf.extractors.all()
 
         return item_structure
 
     def parse_page(self, response):
         structures = self.get_items_structure()
         for st in structures:
-            items = response.xpath(st.xpath)
-            for item in items:
-                yield self._extract_item_data(item, st)
+            if st.xpath:
+
+                items = response.xpath(st.xpath)
+                for item in items:
+                    yield self._extract_item_data(item, st)
+            else:
+                yield self._extract_item_data(response, st)
 
     def _extract_item_data(self, selector, structure):
         data = {}
         attributes = structure.attributes.all()
         for attr in attributes:
-            data[attr.name] = selector.xpath(attr.xpath).extract_first()
+            data[attr.name] = selector.xpath(attr.xpath+"//text()").extract_first()
             print(data)
 
         return data

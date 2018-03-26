@@ -21,7 +21,7 @@ class WebView extends Component {
             view: null,
             attributes: [],
             item: {},
-            extractor : props.extractor
+            extract : props.extract
         }
 
     }
@@ -38,10 +38,11 @@ class WebView extends Component {
 
 
     load(e) {
+        console.log(window.find('#iframe_id'))
         var view = this
         $(e.target).contents().on('click', function (e) {
             e.preventDefault()
-            console.log(view.state.extractor(e))
+            console.log(view.state.extract(e))
 
         });
         $(e.target).contents().mouseover(function (e) {
@@ -61,11 +62,9 @@ class WebView extends Component {
         let src = URL.createObjectURL(blob);
 
         return (
-            <div>
                 <iframe id="iframe_id" onLoad={this.load.bind(this)}
                         className="embed-responsive embed-responsive-16by9" src={src}
                         width="100%" height="1000px" scrolling="yes"></iframe>
-            </div>
         )
     }
 }

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ActionBar from '../components/ActionBar';
 import WebView from "../components/WebView";
 import Extractor from "../components/Extractor";
 
@@ -7,7 +6,7 @@ class CrawlingTools extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            extracted: '',
+            extracted: [],
 
         }
         this.extract = this.extract.bind(this)
@@ -16,7 +15,15 @@ class CrawlingTools extends Component {
 
     getElementXPath(elt) {
         var path = "";
-        console.log(elt.parentNode)
+        let attr_name = 'Non named attribute'
+        console.log(elt.className)
+        if ('itemProp' in elt.attributes){
+            attr_name = elt.getAttribute('itemProp')
+        }else if('class' in  elt.attributes){
+            attr_name = elt.className
+        }else if('id' in  elt.attributes){
+            attr_name = elt.getAttribute('id')
+        }
         for (; elt && elt.nodeType == 1; elt = elt.parentNode) {
             if (elt.tagName === "BODY")
                 break;
@@ -26,28 +33,56 @@ class CrawlingTools extends Component {
 
         }
 
-        return path;
+
+        return {xpath:path,name:attr_name};
     }
 
 
     extract(e) {
-        console.log(e)
-        let state = {...this.state}
-        state.extracted = this.getElementXPath(e.target);
+        let state = {...this.state};
+        state.extracted.push(this.getElementXPath(e.target));
 
         this.setState(state)
+    }
+     remove_attr(index) {
+        let state = this.state;
+        state.extracted = state.extracted.filter((attr,i)=> i != index );
+        //
+        this.setState({...state})
     }
 
     render() {
         let state = this.state
         return (
 
-            <div>
-                <ActionBar/>
+            <div className="container">
+
+
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                    <div className="container">
+                        <a className="navbar-brand js-scroll-trigger" href="#page-top">Genie Crawler</a>
+                        <button className="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarResponsive"
+                                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarResponsive">
+                            <ul className="navbar-nav ml-auto">
+                                <Extractor extracted={state.extracted} removeHandler={this.remove_attr.bind(this)}/>
+                                <li className="nav-item">
+                                    <button className="btn btn-dark my-2 my-sm-0">Run</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="btn btn-dark my-2 my-sm-0">Export</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
                 <div className="iframe_wrap" id="div1">
                     <div className="iframe_wrap" id="div1">
-                        <Extractor extracted={state.extracted} a/>
-                        <WebView extractor={this.extract} url="http://quotes.toscrape.com/"/>
+
+                        <WebView extract={this.extract} url="http://quotes.toscrape.com/"/>
                     </div>
                 </div>
             </div>
