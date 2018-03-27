@@ -17,11 +17,11 @@ class CrawlingTools extends Component {
         var path = "";
         let attr_name = 'Non named attribute'
         console.log(elt.className)
-        if ('itemProp' in elt.attributes){
+        if ('itemProp' in elt.attributes) {
             attr_name = elt.getAttribute('itemProp')
-        }else if('class' in  elt.attributes){
+        } else if ('class' in elt.attributes) {
             attr_name = elt.className
-        }else if('id' in  elt.attributes){
+        } else if ('id' in elt.attributes) {
             attr_name = elt.getAttribute('id')
         }
         for (; elt && elt.nodeType == 1; elt = elt.parentNode) {
@@ -34,7 +34,7 @@ class CrawlingTools extends Component {
         }
 
 
-        return {xpath:path,name:attr_name};
+        return {xpath: path, name: attr_name};
     }
 
 
@@ -44,11 +44,20 @@ class CrawlingTools extends Component {
 
         this.setState(state)
     }
-     remove_attr(index) {
+
+    remove_attr(index) {
         let state = this.state;
-        state.extracted = state.extracted.filter((attr,i)=> i != index );
+        state.extracted = state.extracted.filter((attr, i) => i != index);
         //
         this.setState({...state})
+    }
+
+    run() {
+
+    }
+
+    export() {
+
     }
 
     render() {
@@ -58,7 +67,7 @@ class CrawlingTools extends Component {
             <div className="container">
 
 
-                <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div className="container">
                         <a className="navbar-brand js-scroll-trigger" href="#page-top">Genie Crawler</a>
                         <button className="navbar-toggler" type="button" data-toggle="collapse"
@@ -68,7 +77,9 @@ class CrawlingTools extends Component {
                         </button>
                         <div className="collapse navbar-collapse" id="navbarResponsive">
                             <ul className="navbar-nav ml-auto">
-                                <Extractor extracted={state.extracted} removeHandler={this.remove_attr.bind(this)}/>
+                                <li className="nav-item">
+                                    <button className="btn btn-dark my-2 my-sm-0">Web view</button>
+                                </li>
                                 <li className="nav-item">
                                     <button className="btn btn-dark my-2 my-sm-0">Run</button>
                                 </li>
@@ -79,6 +90,9 @@ class CrawlingTools extends Component {
                         </div>
                     </div>
                 </nav>
+                <div className="row d-flex justify-content-center">
+                <Extractor extracted={state.extracted} removeHandler={this.remove_attr.bind(this)}/>
+                </div>
                 <div className="iframe_wrap" id="div1">
                     <div className="iframe_wrap" id="div1">
 

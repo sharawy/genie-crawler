@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,29 +13,28 @@
     <title>{% block title %}Home{% endblock title %} - Genie Crawler</title>
 
 
-  {% render_bundle 'vendor' 'css' %}
-  {% render_bundle 'front' 'css' %}
-  </head>
+    {% render_bundle 'vendor' 'css' %}
+    {% render_bundle 'front' 'css' %}
+</head>
 
-  <body>
+<body>
 
 
+<div id="root">
 
-    <div   id="root">
+</div>
 
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
     </div>
+    <!-- /.container -->
+</footer>
 
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
-      </div>
-      <!-- /.container -->
-    </footer>
+{% render_bundle 'vendor' 'js' %}
+{% render_bundle 'front' 'js' %}
 
-  {% render_bundle 'vendor' 'js' %}
-  {% render_bundle 'front' 'js' %}
-
-  </body>
+</body>
 
 </html>

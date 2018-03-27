@@ -6,4 +6,4 @@ from .models import GenieSpider
 class GenieSpiderSerializer(serializers.ModelSerializer):
     class Meta:
         model = GenieSpider
-        fields = ('id', 'name', 'url', 'items_structure')
+        fields = ('id', 'name', 'url',)
