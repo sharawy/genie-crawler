@@ -8,6 +8,7 @@ from rest_framework.documentation import include_docs_urls
 from core.urls import urlpatterns as core_urls
 from core.views import home
 from maincrawler.urls import urlpatterns as spider_urls
+from tasksmanager.urls import urlpatterns as tasks_urls
 urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
@@ -15,5 +16,6 @@ urlpatterns = [
 
     url(r"^", include(core_urls)),
     url(r"^", include(spider_urls)),
+    url(r"^", include(tasks_urls)),
 
 ]

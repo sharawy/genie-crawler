@@ -18,7 +18,6 @@ class WebView extends Component {
         this.state = {
             url: props.url,
             html: '',
-            view: null,
             attributes: [],
             item: {},
             extract : props.extract

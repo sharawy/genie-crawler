@@ -8,4 +8,4 @@ class SpiderTaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SpiderTask
-        fields = ('id', 'spider', 'logs', 'status', 'extracted_items', 'scrapyd_task_id')
+        fields = ('id', 'spider', 'logs', 'status', 'extracted_items')

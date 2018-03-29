@@ -7,6 +7,8 @@ class TaskStatus:
     FINISHED = 'finished'
     ERROR = 'error'
     CANCELED = 'canceled'
+    PENDING = 'pending'
+    RUNNING = 'running'
 
     CHOICES = [
         (STARTED, pgettext_lazy('task status', 'Task is running')),
@@ -14,4 +16,6 @@ class TaskStatus:
         (FINISHED, pgettext_lazy('task status', 'Task is finished')),
         (ERROR, pgettext_lazy('task status', 'Task is raised an error')),
         (CANCELED, pgettext_lazy('task status', 'Task is canceled')),
+        (PENDING, pgettext_lazy('task status', 'Task is pending')),
+        (RUNNING, pgettext_lazy('task status', 'Task is running')),
     ]
