@@ -9,7 +9,7 @@ class GenieSpider(models.Model):
     url = models.URLField()
 
     def __str__(self):
-        return self.name
+        return self.name or self.url
 
 
 class ItemAttribute(models.Model):

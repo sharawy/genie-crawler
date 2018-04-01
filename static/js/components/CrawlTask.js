@@ -55,7 +55,9 @@ class CrawlTask extends Component {
             });
         console.log(state);
     }
+    export(){
 
+    }
     getTask() {
         if (this.state.task) {
             if (this.state.task.status === 'finished') {

@@ -19,3 +19,18 @@ class TaskStatus:
         (PENDING, pgettext_lazy('task status', 'Task is pending')),
         (RUNNING, pgettext_lazy('task status', 'Task is running')),
     ]
+
+
+class ExportType:
+    CSV = 'csv'
+    JSON = 'json'
+    SQL = 'sql'
+    XML = 'xml'
+
+    CHOICES = [
+        (CSV, pgettext_lazy('Export Type', 'CSV')),
+        (JSON, pgettext_lazy('Export Type', 'JSON')),
+        (SQL, pgettext_lazy('Export Type', 'SQL')),
+        (XML, pgettext_lazy('Export Type', 'XML')),
+
+    ]

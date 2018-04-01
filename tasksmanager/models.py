@@ -5,7 +5,7 @@ from django.db import models
 
 from genie_crawler.settings import USER_AGENT, CRAWLER_NAME, scrapyd
 from maincrawler.models import GenieSpider
-from . import TaskStatus
+from . import TaskStatus, ExportType
 
 
 class SpiderTask(models.Model):
@@ -58,3 +58,9 @@ class SpiderTask(models.Model):
             self.status = TaskStatus.CANCELED
             self.save()
         return self
+
+
+class ExportFile(models.Model):
+    task = models.ForeignKey(SpiderTask, on_delete=models.CASCADE)
+    type = models.CharField(choices=ExportType.CHOICES, max_length=5)
+    file = models.FileField(upload_to='exports')

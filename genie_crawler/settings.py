@@ -126,6 +126,9 @@ STATICFILES_DIRS = [
     ('assets', os.path.join(BASE_DIR, 'static', 'assets')),
 
 ]
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
 CRAWLER_NAME = "defaultcrawler"
 from scrapyd_api import ScrapydAPI

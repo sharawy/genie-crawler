@@ -1,21 +1,17 @@
-from html.parser import HTMLParser
-
-from django.shortcuts import render
-
 # Create your views here.
-from django.template.response import TemplateResponse
+
 import requests
+from django.template.response import TemplateResponse
 from rest_framework.decorators import api_view, renderer_classes
-from rest_framework.renderers import TemplateHTMLRenderer, StaticHTMLRenderer
+from rest_framework.renderers import StaticHTMLRenderer
 from rest_framework.response import Response
-from rest_framework.views import APIView
+
 from core.utils import add_base_tag
 
 
 def home(request):
     return TemplateResponse(
         request, 'base.html')
-
 
 
 @api_view(('GET',))
