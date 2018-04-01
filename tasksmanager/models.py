@@ -61,6 +61,6 @@ class SpiderTask(models.Model):
 
 
 class ExportFile(models.Model):
-    task = models.ForeignKey(SpiderTask, on_delete=models.CASCADE)
+    task = models.ForeignKey(SpiderTask, on_delete=models.CASCADE, related_name='exported_file')
     type = models.CharField(choices=ExportType.CHOICES, max_length=5)
     file = models.FileField(upload_to='exports')
