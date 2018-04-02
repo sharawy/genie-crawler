@@ -12,5 +12,6 @@ class SpiderTaskViewSet(ModelViewSet):
 
     @detail_route(methods=['post'], url_path='export', serializer_class=ExportFileSerializer)
     def export(self, request, pk):
+        print(request.data)
         file = self.get_object().exported_file.filter(type=request.data['type']).first()
         return Response(self.get_serializer(instance=file).data)

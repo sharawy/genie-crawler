@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {API} from "../common/constants";
+import Modal from "../common/Modal";
 
 class Task {
     constructor({id, logs, spider, status, extracted_items}) {
@@ -23,18 +24,18 @@ const Row = (props) => {
 }
 
 class CrawlTask extends Component {
-    TASK_URL = API + 'tasks/'
+    TASK_URL = API + 'tasks/';
 
     constructor(props) {
         super(props)
         this.state = {
 
             spider_id: props.spider_id,
-            start_task_url: 'spiders/' + props.spider_id + '/start_task/',
-            task: null
+            task: null,
 
         }
         this.run = this.run.bind(this);
+        this.export = this.export.bind(this);
     }
 
     componentDidMount() {
@@ -44,20 +45,35 @@ class CrawlTask extends Component {
     }
 
     run() {
-        let state = this.state
-
-        fetch(this.state.start_task_url)
+        let state = this.state;
+        let start_task_url = 'spiders/' + state.spider_id + '/start_task/';
+        fetch(start_task_url)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
                 state.task = new Task(data)
                 this.setState({...state});
             });
-        console.log(state);
     }
-    export(){
 
-    }
+    export(type) {
+        let state = this.state;
+        let export_url = this.TASK_URL + state.task.id + '/export/';
+        fetch(export_url, {
+            method: 'POST',
+            body: JSON.stringify({type: type}),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.file);
+                window.open(data.file);
+            });
+    };
+
     getTask() {
         if (this.state.task) {
             if (this.state.task.status === 'finished') {
@@ -99,7 +115,12 @@ class CrawlTask extends Component {
         return (
             <div className='container'>
                 <div className="btn-toolbar">
-                    <button className="btn" disabled>Export</button>
+                    <Modal title="Export">
+                        <div className='text-center'>
+                            <button className="btn btn-info" onClick={() => this.export('csv')}>CSV</button>
+                            <button className="btn btn-info" onClick={() => this.export('xml')}>XML</button>
+                        </div>
+                    </Modal>
                     <button className="btn btn-info" disabled>{status}</button>
                 </div>
                 <div className="well">

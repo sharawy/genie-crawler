@@ -14,4 +14,4 @@ class ExportFileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ExportFile
-        fields = ('type', 'task', 'file')
+        fields = ('type', 'file')
