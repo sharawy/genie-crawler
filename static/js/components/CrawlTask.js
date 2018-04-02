@@ -21,7 +21,7 @@ const Row = (props) => {
         <tr key={props.key}>
             {values}
         </tr>);
-}
+};
 
 class CrawlTask extends Component {
     TASK_URL = API + 'tasks/';
@@ -51,7 +51,7 @@ class CrawlTask extends Component {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                state.task = new Task(data)
+                state.task = new Task(data);
                 this.setState({...state});
             });
     }
@@ -84,7 +84,7 @@ class CrawlTask extends Component {
             fetch(this.TASK_URL + state.task.id)
                 .then(response => response.json())
                 .then(data => {
-                    state.task = new Task(data)
+                    state.task = new Task(data);
                     this.setState({...state});
                 });
         }
@@ -96,7 +96,7 @@ class CrawlTask extends Component {
         let status = "Not started";
         let result = "Waiting..";
         if (state.task !== null) {
-            console.log(state.task)
+            console.log(state.task);
             status = state.task.status;
             if (state.task.extracted_items.length > 0) {
                 result = state.task.extracted_items.map(function (item, key) {

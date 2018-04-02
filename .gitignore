@@ -117,3 +117,4 @@ webpack-bundle.json
 
 local_settings.py
 *.db
+*.db
