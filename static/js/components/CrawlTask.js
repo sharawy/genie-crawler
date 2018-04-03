@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {API} from "../common/constants";
 import Modal from "../common/Modal";
+import ActionBar from "./ActionBar";
 
 class Task {
     constructor({id, logs, spider, status, extracted_items}) {
@@ -9,6 +10,7 @@ class Task {
         this.spider_id = spider;
         this.status = status;
         this.extracted_items = extracted_items;
+        this.interval = null;
     }
 }
 
@@ -27,30 +29,32 @@ class CrawlTask extends Component {
     TASK_URL = API + 'tasks/';
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
 
-            spider_id: props.spider_id,
+            spiderId: props.match.params.spiderId,
             task: null,
 
-        }
+        };
         this.run = this.run.bind(this);
         this.export = this.export.bind(this);
     }
 
     componentDidMount() {
-        console.log(this.state);
         this.run();
-        setInterval(this.getTask.bind(this), 4000);
+        this.interval = setInterval(this.getTask.bind(this), 4000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     run() {
         let state = this.state;
-        let start_task_url = 'spiders/' + state.spider_id + '/start_task/';
+        let start_task_url = 'spiders/' + state.spiderId + '/start_task/';
         fetch(start_task_url)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 state.task = new Task(data);
                 this.setState({...state});
             });
@@ -69,7 +73,6 @@ class CrawlTask extends Component {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data.file);
                 window.open(data.file);
             });
     };
@@ -79,8 +82,7 @@ class CrawlTask extends Component {
             if (this.state.task.status === 'finished') {
                 return;
             }
-            let state = this.state
-            console.log(state);
+            let state = this.state;
             fetch(this.TASK_URL + state.task.id)
                 .then(response => response.json())
                 .then(data => {
@@ -96,7 +98,6 @@ class CrawlTask extends Component {
         let status = "Not started";
         let result = "Waiting..";
         if (state.task !== null) {
-            console.log(state.task);
             status = state.task.status;
             if (state.task.extracted_items.length > 0) {
                 result = state.task.extracted_items.map(function (item, key) {
@@ -114,6 +115,7 @@ class CrawlTask extends Component {
 
         return (
             <div className='container'>
+                <ActionBar spiderId={this.state.spiderId}/>
                 <div className="btn-toolbar">
                     <Modal title="Export">
                         <div className='text-center'>

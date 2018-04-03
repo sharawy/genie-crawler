@@ -19,13 +19,13 @@ class App extends Component {
 
 				  />
 				 <Route
-				  	path='/tools'
+				  	path='/tools/:spiderId'
 				  	exact
 				  	component={CrawlingTools}
 
 				  />
 				   <Route
-				  	path='/run'
+				  	path='/run/:spiderId'
 				  	exact
 				  	component={CrawlTask}
 

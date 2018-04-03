@@ -13,7 +13,6 @@ class Extractor extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
         let state = {
             itemXpath: '',
             attributes: nextProps.extracted

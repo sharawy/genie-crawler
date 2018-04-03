@@ -10,15 +10,16 @@ class SpiderForm extends Component {
     }
 
     createSpider(event) {
-        event.preventDefault()
+        event.preventDefault();
         const data = new FormData(event.target);
-        data.append('name', data.get('url'))
+        data.append('name', data.get('url'));
         fetch(this.CREATE_SPIDER_URL, {
             method: 'POST',
             body: data,
         }).then(response => response.json())
             .then(data => {
-                console.log(data)
+                this.props.history.push('/tools/'+data.id);
+
             });
         ;
     }

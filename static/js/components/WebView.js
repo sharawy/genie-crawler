@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import {API} from '../common/constants'
-import Extractor from "./Extractor";
 
 class XpathValue {
     constructor(name, xpath) {
@@ -20,7 +19,7 @@ class WebView extends Component {
             html: '',
             attributes: [],
             item: {},
-            extract : props.extract
+            extract: props.extract,
         }
 
     }
@@ -35,13 +34,11 @@ class WebView extends Component {
     }
 
 
-
     load(e) {
-        console.log(window.find('#iframe_id'))
         var view = this
         $(e.target).contents().on('click', function (e) {
             e.preventDefault()
-            console.log(view.state.extract(e))
+            view.state.extract(e)
 
         });
         $(e.target).contents().mouseover(function (e) {
@@ -61,9 +58,9 @@ class WebView extends Component {
         let src = URL.createObjectURL(blob);
 
         return (
-                <iframe id="iframe_id" onLoad={this.load.bind(this)}
-                        className="embed-responsive embed-responsive-16by9" src={src}
-                        width="100%" height="1000px" scrolling="yes"></iframe>
+            <iframe id="iframe_id" onLoad={this.load.bind(this)}
+                    className="embed-responsive embed-responsive-16by9" src={src}
+                    width="100%" height="1000px" scrolling="yes"/>
         )
     }
 }
