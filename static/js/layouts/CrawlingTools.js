@@ -6,6 +6,7 @@ import {API} from "../common/constants";
 
 class CrawlingTools extends Component {
     GET_SPIDER_URL = API + 'spiders/';
+    EXTRACTOR_URL = API + 'extractors/';
 
     constructor(props) {
         super(props);
@@ -13,13 +14,14 @@ class CrawlingTools extends Component {
             extracted: [],
             url: null,
             spiderId: props.match.params.spiderId,
+            extractorId: null
 
         };
         this.extract = this.extract.bind(this)
-        this.getElementXPath = this.getElementXPath.bind(this)
+        this.getElement = this.getElement.bind(this)
     }
 
-    getElementXPath(elt) {
+    getElement(elt) {
         var path = "";
         let attr_name = 'Non named attribute';
         if ('itemProp' in elt.attributes) {
@@ -45,16 +47,36 @@ class CrawlingTools extends Component {
 
     extract(e) {
         let state = {...this.state};
-        state.extracted.push(this.getElementXPath(e.target));
+        let attribute = this.getElement(e.target);
+        let data = new FormData();
+        data.append('name', attribute.name)
+        data.append('xpath', attribute.xpath)
+        fetch(this.EXTRACTOR_URL + state.extractorId + "/add_attribute/",
+            {
+                method: 'POST',
+                body: data,
+            }).then(response => response.json())
+            .then(data => {
+                attribute['id'] = data.id;
+                state.extracted.push(attribute);
+                this.setState(state)
+            });
 
-        this.setState(state)
     }
 
-    remove_attr(index) {
+    remove_attr(id) {
         let state = this.state;
-        state.extracted = state.extracted.filter((attr, i) => i != index);
+
         //
-        this.setState({...state})
+        fetch(this.EXTRACTOR_URL + state.extractorId + "/remove_attribute/" + id,
+            {
+                method: 'DELETE',
+            })
+            .then(data => {
+                state.extracted = state.extracted.filter((attr, i) => attr.id != id);
+                this.setState({...state})
+            });
+
     }
 
     componentDidMount() {
@@ -62,8 +84,15 @@ class CrawlingTools extends Component {
         fetch(this.GET_SPIDER_URL + this.state.spiderId).then(response => response.json())
             .then(data => {
                 state.url = data.url;
+                let extractors = data.extractors;// TODO: handle multiple extractors
+
+                if (extractors.length == 1) {
+                    state.extracted = extractors[0].attributes
+                    state.extractorId = extractors[0].id
+                }
                 this.setState({...state})
             });
+
     }
 
     render() {

@@ -25,7 +25,7 @@ class Extractor extends Component {
 
         let state = this.state;
         let attrs = state.attributes.map((attr, index) =>
-            <ItemAttribute key={index} removeHandler={(e) => this.remove_attr(index)} xpath={attr.xpath}
+            <ItemAttribute key={attr.id} removeHandler={(e) => this.remove_attr(attr.id)} xpath={attr.xpath}
                            name={attr.name}/>
         );
 
