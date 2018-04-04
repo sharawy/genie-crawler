@@ -1,13 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
-
+@import "~font-awesome/css/font-awesome.css";
 
 .dropdown-menu {
     min-width:24rem ;
 }
-.left80{
-    left: -118%;
-}
-
 
 * {
   box-sizing: border-box;
@@ -27,11 +23,10 @@ section {
   max-width: none;
   background-color: #373B44;
   height: 100vh;
-
-  &:nth-of-type(2n) {
-    background-color: #FE4B74;
-  }
 }
+.section:nth-of-type(2n) {
+    background-color: #FE4B74;
+ }
 
 .intro {
   height: 90vh;
@@ -55,16 +50,41 @@ p {
   color: #C3CAD9;
 }
 
-
+.extractor .btn-dark:after {
+    border-top: 0.5em solid;
+    border-right: 0.5em solid transparent;
+    border-bottom: 0;
+    border-left: 0.5em solid transparent;
+    float: right;
+    margin-top: 5px;
+}
+.extractor .btn-dark{
+      width: 24rem;
+    text-align: left;
+    margin-bottom: 0!important;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: #333!important;
+}
+.btn-dark.dropdown-toggle:focus{
+    box-shadow: none!important;
+}
+.extractor .dropdown-menu{
+    margin-top: 0;
+    top: 98%;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    color: #333;
+        background-color: #f9f9f9;
+}
 footer {
   padding: 1% 5%;
   text-align:center;
   background-color: #373B44;
   color: white;
-
-  a {
+}
+footer a {
     color: #FE4B74;
     font-weight: 500;
     text-decoration: none;
-  }
 }

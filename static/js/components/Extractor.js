@@ -25,7 +25,8 @@ class Extractor extends Component {
 
         let state = this.state;
         let attrs = state.attributes.map((attr, index) =>
-            <ItemAttribute key={index} removeHandler={(e) => this.remove_attr(index)} xpath={attr.xpath} name={attr.name}/>
+            <ItemAttribute key={index} removeHandler={(e) => this.remove_attr(index)} xpath={attr.xpath}
+                           name={attr.name}/>
         );
 
         return (
@@ -36,8 +37,15 @@ class Extractor extends Component {
                     >Extractor
                     </button>
                     <div className="dropdown-menu show row  left80" aria-labelledby="dropdown01">
-                        <h3>Click on element to add xpath</h3>
-                        <form>
+                        <h5 className="text-center">Click on element to add xpath</h5>
+                        <div className="text-center">
+                            <span type="text" className="col-4 d-inline-block form-control">Data</span>
+                            :
+                            <span className="col-4 d-inline-block form-control">Path</span>
+                            <div className="col-3 d-inline-block form-control text-danger">Remove</div>
+                            <br/>
+                        </div>
+                        <form className="p-2 text-center">
                             <div className="form-group">
 
                                 {/*<input type="text" value={state.itemXpath} className="form-control"*/}
@@ -51,8 +59,8 @@ class Extractor extends Component {
                     </div>
                 </div>
             </DragDropContainer>
-        )
+    )
     }
-}
+    }
 
-export default Extractor;
+    export default Extractor;

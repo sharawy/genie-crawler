@@ -74,7 +74,7 @@ class CrawlingTools extends Component {
 
                 <ActionBar spiderId={this.state.spiderId}/>
 
-                <div className="row d-flex justify-content-center">
+                <div className="row d-flex justify-content-center extractor">
                     <Extractor extracted={state.extracted} removeHandler={this.remove_attr.bind(this)}/>
                 </div>
                 <div className="iframe_wrap" id="div1">
