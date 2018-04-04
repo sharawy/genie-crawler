@@ -18,7 +18,7 @@ class ExtractorSerializer(serializers.ModelSerializer):
 
 
 class GenieSpiderSerializer(serializers.ModelSerializer):
-    extractors = ExtractorSerializer(many=True)
+    extractors = ExtractorSerializer(many=True,read_only=True)
 
     class Meta:
         model = GenieSpider

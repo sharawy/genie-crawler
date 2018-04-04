@@ -36,7 +36,7 @@ class BaseExporter(object):
         raise NotImplementedError
 
     def open_spider(self, spider):
-        self.file_name = os.path.join('exports', "{}-{}.{}".format(spider.spider_conf, spider.task.pk, self.extension))
+        self.file_name = os.path.join('exports', "{}-{}.{}".format(spider.domain,spider.task.pk, self.extension))
         path = os.path.join(MEDIA_ROOT, self.file_name)
         self.file = open(path, 'wb')
         self.exporter = self.get_exporter(self.file)  #

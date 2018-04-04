@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {API} from "../common/constants";
+import {API, TASK_STATUS} from "../common/constants";
 import Modal from "../common/Modal";
 import ActionBar from "./ActionBar";
 
@@ -116,15 +116,20 @@ class CrawlTask extends Component {
         return (
             <div className='container'>
                 <ActionBar spiderId={this.state.spiderId}/>
+
                 <div className="btn-toolbar">
-                    <Modal title="Export">
-                        <div className='text-center'>
-                            <button className="btn btn-info" onClick={() => this.export('csv')}>CSV</button>
-                            <button className="btn btn-info" onClick={() => this.export('xml')}>XML</button>
-                        </div>
-                    </Modal>
+                    {status == TASK_STATUS.FINISHED ?
+                        <Modal title="Export">
+                            <div className='text-center'>
+                                <button className="btn btn-info" onClick={() => this.export('csv')}>CSV</button>
+                                <button className="btn btn-info" onClick={() => this.export('xml')}>XML</button>
+                            </div>
+                        </Modal>
+                        : ""
+                    }
                     <button className="btn btn-info" disabled>{status}</button>
                 </div>
+
                 <div className="well">
                     <table className="table">
 

@@ -5,18 +5,21 @@ import {DragDropContainer} from '../../../node_modules/react-drag-drop-container
 class Extractor extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
             itemXpath: '',
-            attributes: props.extracted,
-        }
+            attributes: props.attributes,
+            id: props.id
+        };
         this.remove_attr = props.removeHandler
     }
 
     componentWillReceiveProps(nextProps) {
         let state = {
             itemXpath: '',
-            attributes: nextProps.extracted
-        }
+            attributes: nextProps.attributes,
+            id: nextProps.id
+        };
         this.setState({...state})
     }
 
@@ -24,6 +27,7 @@ class Extractor extends Component {
     render() {
 
         let state = this.state;
+        console.log(state);
         let attrs = state.attributes.map((attr, index) =>
             <ItemAttribute key={attr.id} removeHandler={(e) => this.remove_attr(attr.id)} xpath={attr.xpath}
                            name={attr.name}/>
@@ -59,8 +63,8 @@ class Extractor extends Component {
                     </div>
                 </div>
             </DragDropContainer>
-    )
+        )
     }
-    }
+}
 
-    export default Extractor;
+export default Extractor;
