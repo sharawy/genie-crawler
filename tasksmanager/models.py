@@ -47,7 +47,6 @@ class SpiderTask(models.Model):
 
     def check_status(self):
         status = scrapyd.job_status('default', self.scrapyd_task_id)
-        print(status)
         self.status = status
         self.save()
         return status

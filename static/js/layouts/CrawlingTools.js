@@ -49,6 +49,10 @@ class CrawlingTools extends Component {
         let state = {...this.state};
         let attribute = this.getElement(e.target);
         let data = new FormData();
+        if (attribute.xpath =="")
+        {
+            return;
+        }
         data.append('name', attribute.name);
         data.append('xpath', attribute.xpath);
         fetch(this.EXTRACTOR_URL + state.extractor.id + "/add_attribute/",

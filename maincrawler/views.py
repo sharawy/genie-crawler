@@ -51,5 +51,4 @@ class ExtractorViewSet(ModelViewSet):
     def remove_attribute(self, request, pk, attribute_id):
         extractor = self.get_object()
         extractor.attributes.filter(pk=attribute_id).delete()
-        # extractor.save()
         return Response(status=status.HTTP_204_NO_CONTENT)

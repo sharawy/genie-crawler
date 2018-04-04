@@ -37,8 +37,8 @@ class WebView extends Component {
     load(e) {
         var view = this
         $(e.target).contents().on('click', function (e) {
-            e.preventDefault()
-            view.state.extract(e)
+            e.preventDefault();
+            view.state.extract(e);
 
         });
         $(e.target).contents().mouseover(function (e) {
