@@ -2,12 +2,7 @@ import React, {Component} from 'react';
 
 import {API} from '../common/constants'
 
-class XpathValue {
-    constructor(name, xpath) {
-        this.name = name;
-        this.xpath = xpath;
-    }
-}
+
 
 class WebView extends Component {
     FETCH_WEBVIEW = API + "fetch_website/?url=";

@@ -3,8 +3,8 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter, Route} from 'react-router-dom';
 import CrawlingTools from './layouts/CrawlingTools'
-import SpiderForm from './components/SpiderForm'
-import CrawlTask from "./components/CrawlTask";
+import SpiderForm from './layouts/SpiderForm'
+import CrawlTask from "./layouts/CrawlTask";
 
 class App extends Component {
 
